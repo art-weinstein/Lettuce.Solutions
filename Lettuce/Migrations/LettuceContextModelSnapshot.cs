@@ -138,6 +138,27 @@ namespace Lettuce.Migrations
                     b.ToTable("LettucePlants");
                 });
 
+            modelBuilder.Entity("Lettuce.Models.UserLettucePlant", b =>
+                {
+                    b.Property<int>("UserLettucePlantId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("LettucePlantId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
+
+                    b.HasKey("UserLettucePlantId");
+
+                    b.HasIndex("LettucePlantId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserLettucePlants");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -292,6 +313,23 @@ namespace Lettuce.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Lettuce.Models.UserLettucePlant", b =>
+                {
+                    b.HasOne("Lettuce.Models.LettucePlant", "LettucePlant")
+                        .WithMany("UserLettucePlants")
+                        .HasForeignKey("LettucePlantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Lettuce.Models.ApplicationUser", "User")
+                        .WithMany("UserLettucePlants")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("LettucePlant");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -343,6 +381,11 @@ namespace Lettuce.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Lettuce.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("UserLettucePlants");
+                });
+
             modelBuilder.Entity("Lettuce.Models.Brand", b =>
                 {
                     b.Navigation("JoinEntities");
@@ -351,6 +394,8 @@ namespace Lettuce.Migrations
             modelBuilder.Entity("Lettuce.Models.LettucePlant", b =>
                 {
                     b.Navigation("JoinEntities");
+
+                    b.Navigation("UserLettucePlants");
                 });
 #pragma warning restore 612, 618
         }

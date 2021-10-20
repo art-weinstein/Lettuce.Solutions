@@ -213,6 +213,32 @@ namespace Lettuce.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserLettucePlants",
+                columns: table => new
+                {
+                    UserLettucePlantId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    LettucePlantId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "varchar(255) CHARACTER SET utf8mb4", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserLettucePlants", x => x.UserLettucePlantId);
+                    table.ForeignKey(
+                        name: "FK_UserLettucePlants_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserLettucePlants_LettucePlants_LettucePlantId",
+                        column: x => x.LettucePlantId,
+                        principalTable: "LettucePlants",
+                        principalColumn: "LettucePlantId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -264,6 +290,16 @@ namespace Lettuce.Migrations
                 name: "IX_LettucePlants_UserId",
                 table: "LettucePlants",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLettucePlants_LettucePlantId",
+                table: "UserLettucePlants",
+                column: "LettucePlantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLettucePlants_UserId",
+                table: "UserLettucePlants",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -285,6 +321,9 @@ namespace Lettuce.Migrations
 
             migrationBuilder.DropTable(
                 name: "BrandLettucePlants");
+
+            migrationBuilder.DropTable(
+                name: "UserLettucePlants");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

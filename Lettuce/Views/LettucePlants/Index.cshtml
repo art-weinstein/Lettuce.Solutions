@@ -10,7 +10,7 @@
 
 @foreach (LettucePlant lettucePlant in Model)
 {
-  <li>@lettucePlant.Name</li>
+  <li>@Html.ActionLink($"{lettucePlant.Name}", "Details", new {id = lettucePlant.LettucePlantId})</li>
 }
 
 <p>@Html.ActionLink("Create a lettuce", "Create", "LettucePlants")</p>

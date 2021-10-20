@@ -9,12 +9,14 @@ namespace Lettuce.Models
     public int LettucePlantId { get; set; }
     public string Name { get; set; }
     public virtual ApplicationUser User {get;set;}
+    public virtual ICollection <UserLettucePlant> UserLettucePlants {get;set;}
 
     public virtual ICollection <BrandLettucePlant> JoinEntities { get; set; }
 
     public LettucePlant()
     {
       this.JoinEntities = new HashSet<BrandLettucePlant>();
+      this.UserLettucePlants = new HashSet<UserLettucePlant>();
     }
   }
 }

@@ -1,0 +1,15 @@
+@using Lettuce.Models;
+@using System.Security.Claims;
+@using Microsoft.AspNetCore.Identity;
+@model Lettuce.Models.LettucePlant
+<div class="jumbotron">
+  <h1>letus</h1>
+</div>
+
+<h1> @Model.Name</h1>
+<h1>@Model.Email</h1>
+
+@foreach(var join in Model.UserLettucePlants)
+{
+  <p>@join.User.Email</p>
+}

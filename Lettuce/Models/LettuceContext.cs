@@ -8,6 +8,7 @@ namespace Lettuce.Models
   public DbSet<LettucePlant> LettucePlants {get;set;}
   public DbSet<Brand> Brands {get;set;}
   public DbSet<BrandLettucePlant> BrandLettucePlants {get;set;}
+  public DbSet<UserLettucePlant> UserLettucePlants {get;set;}
 
     public LettuceContext(DbContextOptions options) : base(options) { }
 

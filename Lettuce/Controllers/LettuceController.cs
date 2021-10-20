@@ -40,10 +40,20 @@ namespace Lettuce.Controllers
         var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var currentUser = await _userManager.FindByIdAsync(userId);
         lettuce.User = currentUser;
-        // lettuce.Users.Add(currentUser)
         _db.LettucePlants.Add(lettuce);
         _db.SaveChanges();
         return RedirectToAction("Index");
+    }
+
+    public ActionResult Details(int id)
+    {
+      var thisLettuce = _db.LettucePlants
+      .Include(lettucePlant => lettucePlant.UserLettucePlants)
+      .ThenInclude(join => join.User)
+      .FirstOrDefault(LettucePlant => LettucePlant.LettucePlantId == id);
+
+
+      return View(thisLettuce);
     }
   }
 }
