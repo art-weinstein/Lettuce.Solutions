@@ -1,6 +1,13 @@
-<h1>Welceom to the lettuce</h1>
+@{
+  Layout = "_Layout";
+}
+
+<div class="jumbotron">
+  <h1>Welcome to the lettuce</h1>
+</div>
 
 <p>
   @Html.ActionLink("New Account", "Register", "Account")
-  @Html.ActionLink("Lettuce", "Index", "Lettuce")
+  @Html.ActionLink("Account Details", "Index", "Account")
+  @Html.ActionLink("Lettuce", "Index", "LettucePlants")
 </p>

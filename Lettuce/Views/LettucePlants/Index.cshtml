@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="jumbotron">
+  <h1>Letucci</h1>
+</div>
+
+@using Lettuce.Models
+
+@foreach (LettucePlant lettucePlant in Model)
+{
+  <li>@lettucePlant.Name</li>
+}
+
+<p>@Html.ActionLink("Create a lettuce", "Create", "LettucePlants")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

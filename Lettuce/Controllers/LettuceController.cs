@@ -20,7 +20,7 @@ namespace Lettuce.Controllers
     public LettucePlantsController(LettuceContext db, UserManager<ApplicationUser> userManager)
     {
       _db = db;
-      _userManager = _userManager;
+      _userManager = userManager;
     }
 
     [AllowAnonymous]
@@ -40,6 +40,7 @@ namespace Lettuce.Controllers
         var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var currentUser = await _userManager.FindByIdAsync(userId);
         lettuce.User = currentUser;
+        // lettuce.Users.Add(currentUser)
         _db.LettucePlants.Add(lettuce);
         _db.SaveChanges();
         return RedirectToAction("Index");
